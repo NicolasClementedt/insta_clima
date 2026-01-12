@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>InstaClima — Temperatura instantânea</title>
+  <link rel="stylesheet" href="src/css/styles.css">
+</head>
+<body>
+  <main class="container">
+    <div class="app-panel" role="application" aria-labelledby="app-title">
+      <header class="app-header">
+        <h1 id="app-title" class="title">
+          <span class="brand">Insta</span><span class="brand-strong">Clima</span>
+        </h1>
+        <p class="tagline">O tempo da sua cidade, agora.</p>
+      </header>
+
+      <form id="search-form" class="search" aria-label="Buscar cidade">
+        <label class="visually-hidden" for="city-input">Cidade</label>
+        <div class="input-wrap">
+          <svg class="icon icon-search" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M21 21l-4.35-4.35M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z"></path></svg>
+          <input id="city-input" name="city" type="search" placeholder="Ex: São Paulo" required autocomplete="off" />
+        </div>
+
+        <button id="search-btn" type="submit" class="btn">Buscar</button>
+      </form>
+
+      <section id="result" aria-live="polite" class="result">
+        <div class="placeholder">
+          <svg class="icon-sun" viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="28" r="8" fill="#FFD54F"></circle>
+            <g stroke="#FFD54F" stroke-width="2" stroke-linecap="round">
+              <path d="M32 8v6"></path>
+              <path d="M32 50v6"></path>
+              <path d="M8 32h6"></path>
+              <path d="M50 32h6"></path>
+              <path d="M14 14l4 4"></path>
+              <path d="M46 46l4 4"></path>
+              <path d="M14 50l4-4"></path>
+              <path d="M46 18l4-4"></path>
+            </g>
+          </svg>
+          <div class="placeholder-text">Pesquise uma cidade para ver a temperatura.</div>
+        </div>
+      </section>
+
+      <footer class="app-footer">
+        <small>Dados: Open‑Meteo • Projeto: InstaClima</small>
+      </footer>
+    </div>
+  </main>
+
+  <script type="module" src="src/js/app.js"></script>
+</body>
+</html>

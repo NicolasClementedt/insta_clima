@@ -1,0 +1,274 @@
+:root{
+  --max-width: 720px;
+  --panel-width: 100%;
+  --accent-start: #FFD54F; /* amarelo */
+  --accent-end: #0b7285;   /* azul/teal */
+  --muted: #6b7280;
+  --bg-top: #a8dbff;
+  --bg-mid: #e6f7ff;
+  --bg-bottom: #f7fafc;
+  --panel-bg: rgba(255,255,255,0.96);
+  --panel-bg-muted: #f6f8fa;
+  --radius: 14px;
+  --glass-blur: 8px;
+  --shadow: 0 10px 30px rgba(2,6,23,0.12);
+  --text: #0f172a;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+
+  /* Céu de fundo com gradiente suave */
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 55%, var(--bg-bottom) 100%);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:2rem;
+  position:relative;
+  overflow:hidden;
+}
+
+/* Nuvens decorativas (duas camadas com leve animação) */
+body::before,
+body::after {
+  content: "";
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  height: 45%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  opacity: 0.55;
+  filter: blur(18px) saturate(1.05);
+  transform: translateZ(0);
+  pointer-events: none;
+}
+
+body::before {
+  top: 6%;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400'><g fill='%23ffffff'><ellipse cx='200' cy='120' rx='160' ry='60'/><ellipse cx='360' cy='100' rx='120' ry='50'/><ellipse cx='540' cy='120' rx='220' ry='80'/><ellipse cx='820' cy='90' rx='140' ry='50'/></g></svg>");
+  animation: drift 40s linear infinite;
+  opacity: 0.42;
+}
+
+body::after {
+  bottom: -8%;
+  height: 40%;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 400'><g fill='%23ffffff'><ellipse cx='160' cy='160' rx='120' ry='45'/><ellipse cx='360' cy='140' rx='150' ry='60'/><ellipse cx='620' cy='160' rx='120' ry='45'/><ellipse cx='920' cy='140' rx='210' ry='70'/></g></svg>");
+  animation: driftReverse 55s linear infinite;
+  opacity: 0.35;
+}
+
+/* drift animations */
+@keyframes drift {
+  from { transform: translateX(-5%); }
+  to   { transform: translateX(5%); }
+}
+@keyframes driftReverse {
+  from { transform: translateX(5%); }
+  to   { transform: translateX(-5%); }
+}
+
+/* Centro e cartão */
+.container{
+  width:100%;
+  max-width:var(--max-width);
+  padding: clamp(1rem, 2vw, 2rem);
+}
+
+.app-panel{
+  width:var(--panel-width);
+  background: linear-gradient(180deg, var(--panel-bg) 0%, var(--panel-bg-muted) 100%);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: clamp(1rem, 2.2vw, 2rem);
+  backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid rgba(15,23,42,0.06);
+}
+
+/* Header / título com gradiente (amarelo -> azul) */
+.app-header{
+  display:flex;
+  flex-direction:column;
+  gap:0.25rem;
+  margin-bottom:0.85rem;
+}
+
+.title{
+  margin:0;
+  font-size: clamp(1.4rem, 3.5vw, 2rem);
+  line-height:1;
+  letter-spacing: -0.02em;
+  display:flex;
+  align-items:baseline;
+  gap:0.25rem;
+  font-weight:700;
+}
+
+/* separo "Insta" e "Clima" para poder brincar com pesos se quiser */
+.brand, .brand-strong {
+  background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display:inline-block;
+}
+
+/* Tagline mais discreta */
+.tagline{
+  margin:0;
+  color:var(--muted);
+  font-size:0.95rem;
+}
+
+/* Search form */
+.search{
+  display:flex;
+  gap:0.6rem;
+  align-items:center;
+  margin-top:0.5rem;
+  margin-bottom:0.9rem;
+}
+
+.input-wrap{
+  flex:1;
+  display:flex;
+  align-items:center;
+  gap:0.6rem;
+  background: #fff;
+  border-radius: 10px;
+  padding: 0.45rem 0.75rem;
+  border: 1px solid rgba(15,23,42,0.06);
+  box-shadow: 0 4px 12px rgba(2,6,23,0.04);
+}
+
+.input-wrap:focus-within{
+  outline: 3px solid rgba(11,114,133,0.08);
+}
+
+input[type="search"]{
+  border:0;
+  outline:0;
+  background:transparent;
+  font-size:1rem;
+  padding:0.25rem 0;
+  width:100%;
+  color:var(--text);
+}
+
+/* ícone dentro do input */
+.icon {
+  width:20px;
+  height:20px;
+  flex:0 0 20px;
+  color: #94a3b8;
+}
+
+.btn{
+  background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+  color:#fff;
+  border:0;
+  padding:0.6rem 1rem;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:600;
+  box-shadow: 0 6px 18px rgba(11,114,133,0.12);
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+}
+
+.btn:active{ transform: translateY(1px) }
+.btn:disabled{ opacity:0.6; cursor:not-allowed }
+
+/* Resultado / cartão de clima */
+.result{
+  background: transparent;
+  min-height:4.2rem;
+  padding:0.6rem;
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  gap:0.8rem;
+}
+
+/* Placeholder / estado inicial */
+.placeholder{
+  display:flex;
+  gap:0.8rem;
+  align-items:center;
+  color:var(--muted);
+}
+
+.icon-sun{ width:40px; height:40px; flex:0 0 40px }
+
+/* Quando o app renderizar um weather card, o JS pode inserir .weather-card.
+   For estilo pronto, deixo a classe aqui como exemplo. */
+.weather-card{
+  display:flex;
+  align-items:center;
+  gap:1rem;
+  width:100%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(250,250,252,0.9));
+  padding:0.6rem 0.8rem;
+  border-radius:10px;
+  border:1px solid rgba(15,23,42,0.04);
+  box-shadow: 0 8px 20px rgba(2,6,23,0.06);
+}
+
+.weather-icon {
+  width:72px;
+  height:72px;
+  border-radius:14px;
+  display:grid;
+  place-items:center;
+  background: linear-gradient(180deg, rgba(255,213,79,0.12), rgba(11,114,133,0.06));
+  box-shadow: inset 0 -6px 12px rgba(11,114,133,0.02);
+  flex:0 0 72px;
+}
+
+.weather-main {
+  display:flex;
+  flex-direction:column;
+  gap:0.15rem;
+}
+
+.temp{
+  font-size: clamp(1.25rem, 3.5vw, 2rem);
+  font-weight:700;
+}
+
+.meta{
+  color:var(--muted);
+  font-size:0.9rem;
+}
+
+/* Footer */
+.app-footer{
+  margin-top:0.75rem;
+  text-align:left;
+  color:var(--muted);
+  font-size:0.85rem;
+}
+
+/* Utilities */
+.visually-hidden{
+  position:absolute !important;
+  height:1px; width:1px;
+  overflow:hidden; clip:rect(1px,1px,1px,1px); white-space:nowrap;
+}
+
+/* Responsividade */
+@media (max-width:520px){
+  .search{ flex-direction:column; align-items:stretch; gap:0.5rem }
+  .btn{ width:100%; padding:0.65rem; }
+  .title{ font-size:1.5rem }
+  .weather-icon{ width:56px; height:56px; flex:0 0 56px }
+}
